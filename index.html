@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zenith - Home</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+</head>
+<body>
+    <!-- Adicione isso no início do body -->
+<div class="starfield-background">
+    <canvas id="starfield"></canvas>
+</div>
+
+<!-- Adicione este script no final do body, antes do fechamento </body> -->
+<script>
+    const canvas = document.getElementById('starfield');
+    const ctx = canvas.getContext('2d');
+
+    // Configurar canvas para ocupar toda a tela
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    // Configurações das estrelas
+    const stars = [];
+    const shootingStars = [];
+    const maxStars = 300;
+    const maxShootingStars = 5;
+    const shootingStarSpeed = 5;
+    const trailLength = 50;
+
+    // Criar estrelas fixas com propriedades de animação
+    for (let i = 0; i < maxStars; i++) {
+        stars.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            baseSize: Math.random() * 1.5,
+            size: 0,
+            targetSize: 0,
+            opacity: 0,
+            targetOpacity: Math.random() * 0.8 + 0.2,
+            speed: Math.random() * 0.005 + 0.001,
+            phase: Math.random() * Math.PI * 2
+        });
+        stars[i].targetSize = stars[i].baseSize;
+    }
+
+    // Criar estrelas cadentes
+    function createShootingStar() {
+        const side = Math.floor(Math.random() * 4);
+        let x, y, vx, vy;
+        
+        switch(side) {
+            case 0: // top
+                x = Math.random() * canvas.width;
+                y = 0;
+                vx = (Math.random() - 0.5) * 2;
+                vy = Math.random() * 2 + 1;
+                break;
+            case 1: // right
+                x = canvas.width;
+                y = Math.random() * canvas.height;
+                vx = -(Math.random() * 2 + 1);
+                vy = (Math.random() - 0.5) * 2;
+                break;
+            case 2: // bottom
+                x = Math.random() * canvas.width;
+                y = canvas.height;
+                vx = (Math.random() - 0.5) * 2;
+                vy = -(Math.random() * 2 + 1);
+                break;
+            case 3: // left
+                x = 0;
+                y = Math.random() * canvas.height;
+                vx = Math.random() * 2 + 1;
+                vy = (Math.random() - 0.5) * 2;
+                break;
+        }
+        
+        shootingStars.push({
+            x: x,
+            y: y,
+            vx: vx * shootingStarSpeed,
+            vy: vy * shootingStarSpeed,
+            size: Math.random() * 2 + 1,
+            trail: []
+        });
+    }
+
+    // Animação
+    function animate(timestamp) {
+        // Limpar completamente o canvas a cada frame
+        ctx.fillStyle = '#0a0a1a';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // Desenhar estrelas fixas
+        stars.forEach(star => {
+            // Animar entrada suave
+            if (star.size < star.targetSize) star.size += 0.01;
+            if (star.opacity < star.targetOpacity) star.opacity += 0.01;
+            
+            // Efeito de piscar
+            const pulse = Math.sin(timestamp * star.speed + star.phase) * 0.5 + 0.5;
+            const currentOpacity = star.opacity * (0.7 + pulse * 0.3);
+            const currentSize = star.size * (0.8 + pulse * 0.4);
+            
+            ctx.fillStyle = `rgba(255, 255, 255, ${currentOpacity})`;
+            ctx.fillRect(star.x, star.y, currentSize, currentSize);
+        });
+        
+        // Atualizar e desenhar estrelas cadentes
+        for (let i = shootingStars.length - 1; i >= 0; i--) {
+            const star = shootingStars[i];
+            
+            // Adicionar posição atual ao rastro
+            star.trail.push({x: star.x, y: star.y});
+            
+            // Limitar o comprimento do rastro
+            if (star.trail.length > trailLength) {
+                star.trail.shift();
+            }
+            
+            // Atualizar posição
+            star.x += star.vx;
+            star.y += star.vy;
+            
+            // Desenhar rastro
+            for (let j = 0; j < star.trail.length; j++) {
+                const point = star.trail[j];
+                const progress = j / star.trail.length;
+                const opacity = progress * 0.7;
+                const size = star.size * progress;
+                
+                ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+                ctx.fillRect(point.x, point.y, size, size);
+            }
+            
+            // Desenhar cabeça da estrela
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+            ctx.fillRect(star.x, star.y, star.size, star.size);
+            
+            // Remover estrelas que saíram da tela
+            if (star.x < 0 || star.x > canvas.width || star.y < 0 || star.y > canvas.height) {
+                shootingStars.splice(i, 1);
+            }
+        }
+        
+        // Criar novas estrelas cadentes
+        if (shootingStars.length < maxShootingStars && Math.random() < 0.02) {
+            createShootingStar();
+        }
+        
+        requestAnimationFrame(animate);
+    }
+
+    // Iniciar animação
+    animate();
+
+    // Redimensionar canvas
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+</script>
+
+    <img src="zenithl.png" alt="Logo Zenith" class="logo-empresa">
+    <h1 class="titulo-home">Star of your project</h1>
+    
+    <div class="home-boxes-container">
+        <div class="home-box" onclick="window.location.href='projects.html'">
+            <h2>Start now</h2>
+            <p>See our projects in development</p>
+        </div>
+        
+        <div class="home-box" onclick="window.location.href='support.html'">
+            <h2>Support us</h2>
+            <p>Support our projects</p>
+        </div>
+    </div>
+
+    <div id="sidebar-container"></div>
+
+    <div class="footer">
+        <div class="footer-logo">
+            <img src="powerd.png" alt="Zenith" style="height: 30px; vertical-align: middle;">
+            <span class="footer-text"></span>
+        </div>
+        <br>
+        
+    </div>
+	<style>
+      .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background: transparent; /* Tornar o fundo transparente */
+        color: #000000; /* Cor do texto branco para melhor contraste em fundos escuros */
+        text-align: center;
+
+        font-size: 0.9em; /* Tamanho da fonte menor para o texto "direitos reservados" */
+        z-index: 100; /* Garante que o footer fique acima de outros elementos */
+      }
+
+      .footer-logo {
+        display: inline-block; /* Para que o texto e a imagem fiquem na mesma linha */
+      }
+
+      .footer-text {
+        font-size: 1.2em; /* Tamanho da fonte para "Zenith" */
+        vertical-align: middle; /* Alinhar verticalmente com a imagem, se houver */
+      }
+    </style>
+
+    <script>
+        fetch('sidebar.html')
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById('sidebar-container').innerHTML = data;
+                
+                const script = document.createElement('script');
+                script.src = 'sidebar.js';
+                script.onload = () => {
+                    if (typeof initSidebarToggle === 'function') {
+                        initSidebarToggle();
+                    }
+                };
+                document.body.appendChild(script);
+            });
+
+        function adjustFooterPosition() {
+            const body = document.body;
+            const html = document.documentElement;
+            const fullHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+            const windowHeight = window.innerHeight || html.clientHeight || body.clientHeight;
+            const footer = document.querySelector('.footer');
+
+            if (fullHeight <= windowHeight) {
+                footer.style.position = 'fixed';
+            } else {
+                footer.style.position = 'static';
+            }
+        }
+
+        window.onload = adjustFooterPosition;
+        window.onresize = adjustFooterPosition;
+    </script>
+
+    <script src="script.js"></script>
+</body>
+</html>

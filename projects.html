@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zenith - Projects</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+</head>
+<body>
+    <div class="solid-background"></div>
+
+    <h1 class="projects-title">Projects</h1>
+    
+    <div class="projects-container">
+        <!-- Card ZNotes -->
+        <div class="project-card">
+            <div class="project-icon">
+                <img src="znotes.png" alt="ZNotes">
+            </div>
+            <h3>ZNotes</h3>
+            <p>Your smart notepad for organizing ideas and thoughts.</p>
+            <div class="project-status available">Available</div>
+            <a href="znotes.html" class="project-button">See details</a>
+        </div>
+        
+        <!-- Card ZenBrowser -->
+        <div class="project-card">
+            <div class="project-icon">
+                <div class="browser-icon"></div>
+				<img src="zens.png" alt="zens">
+            </div>
+            <h3>ZenSearch</h3>
+            <p>Fast and secure browser with a focus on privacy.</p>
+            <div class="project-status in-development">Developing</div>
+            <a href="#" class="project-button">Soon</a>
+        </div>
+        
+        <!-- Card Em desenvolvimento -->
+        <div class="project-card">
+            <div class="project-icon">
+                <div class="coming-soon-icon">?</div>
+            </div>
+            <h3>New Project</h3>
+            <p>More information soon.</p>
+            <div class="project-status coming-soon">Coming Soon</div>
+            <a href="#" class="project-button">Waiting</a>
+        </div>
+    </div>
+
+    <div id="sidebar-container"></div>
+
+    <div class="footer">
+        <div class="footer-logo">
+            <img src="powerd.png" alt="Zenith" style="height: 30px; vertical-align: middle;">
+            <span class="footer-text"></span>
+        </div>
+        <br>
+        
+    </div>
+	<style>
+      .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background: transparent; /* Tornar o fundo transparente */
+        color: #000000; /* Cor do texto branco para melhor contraste em fundos escuros */
+        text-align: center;
+
+        font-size: 0.9em; /* Tamanho da fonte menor para o texto "direitos reservados" */
+        z-index: 100; /* Garante que o footer fique acima de outros elementos */
+      }
+
+      .footer-logo {
+        display: inline-block; /* Para que o texto e a imagem fiquem na mesma linha */
+      }
+
+      .footer-text {
+        font-size: 1.2em; /* Tamanho da fonte para "Zenith" */
+        vertical-align: middle; /* Alinhar verticalmente com a imagem, se houver */
+      }
+    </style>
+
+    <script>
+        fetch('sidebar.html')
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById('sidebar-container').innerHTML = data;
+                
+                const script = document.createElement('script');
+                script.src = 'sidebar.js';
+                script.onload = () => {
+                    if (typeof initSidebarToggle === 'function') {
+                        initSidebarToggle();
+                    }
+                };
+                document.body.appendChild(script);
+            });
+
+        function adjustFooterPosition() {
+            const body = document.body;
+            const html = document.documentElement;
+            const fullHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+            const windowHeight = window.innerHeight || html.clientHeight || body.clientHeight;
+            const footer = document.querySelector('.footer');
+
+            if (fullHeight <= windowHeight) {
+                footer.style.position = 'fixed';
+            } else {
+                footer.style.position = 'static';
+            }
+        }
+
+        window.onload = adjustFooterPosition;
+        window.onresize = adjustFooterPosition;
+    </script>
+
+    <script src="script.js"></script>
+</body>
+</html>

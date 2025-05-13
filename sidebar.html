@@ -1,0 +1,118 @@
+<style>
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #222;
+    color: #fff;
+    z-index: 1001;
+    overflow-y: auto;
+    transition: left 0.3s ease-in-out;
+    padding-top: 60px;
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+
+  .sidebar-toggle {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5em;
+    cursor: pointer;
+    z-index: 1002;
+  }
+
+  .sidebar-toggle.open {
+    left: 230px;
+  }
+
+  .sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .sidebar-menu li {
+    padding: 15px 20px;
+    border-bottom: 1px solid #333;
+  }
+
+  .sidebar-menu li:last-child {
+    border-bottom: none;
+  }
+
+  .sidebar-menu a {
+    display: block;
+    color: #ddd;
+    text-decoration: none;
+    font-size: 1em;
+  }
+
+  .sidebar-menu a:hover {
+    color: #eee;
+  }
+
+  .sidebar-icon {
+    margin-right: 10px;
+    font-size: 1.2em;
+    vertical-align: middle;
+  }
+
+  /* ========== NOVAS REGRAS (MOBILE) ========== */
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 280px;
+      left: -280px;
+    }
+    
+    .sidebar-toggle.open {
+      left: 250px;
+    }
+    
+    .sidebar-menu li {
+      padding: 12px 15px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .sidebar {
+      width: 85%;
+      left: -85%;
+    }
+    
+    .sidebar-toggle {
+      font-size: 1.8em;
+      top: 10px;
+      left: 10px;
+    }
+    
+    .sidebar-toggle.open {
+      left: calc(85% - 30px);
+    }
+    
+    .sidebar-logo {
+      height: 60px;
+    }
+  }
+</style>
+
+<button class="sidebar-toggle">☰</button>
+
+<div class="sidebar">
+  <div class="sidebar-header no-bg">
+    <img src="zenithl.png" alt="Zenith" class="sidebar-logo">
+  </div>
+
+  <ul class="sidebar-menu">
+    <li><a href="index.html"><span class="sidebar-icon">🏠</span> Home</a></li>
+    <li><a href="zenith.html"><span class="sidebar-icon">💡</span> Zenith</a></li>
+    <li><a href="projects.html"><span class="sidebar-icon">👤</span> Projects</a></li>
+  </ul>
+</div>

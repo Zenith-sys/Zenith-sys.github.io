@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZNotes</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+</head>
+<body>
+    <div class="solid-background"></div>
+    
+    <div class="content-wrapper">
+        <h1 class="tituznotes">ZNotes</h1>
+        <p class="subtitulo">Note Down the Cosmos</p>
+
+        <div class="download-box">
+            <img src="znotes.png" alt="Logo Znotes" class="logo-aplicacao">
+            <p>An app where you can take notes in the simplest, safest and easiest way. Furthermore, it is extremely customizable, perfect for any user.</p>
+            <a href="LINK_PARA_DOWNLOAD_DO_APK" class="download-button">Download</a>
+        </div>
+
+        <div class="compatibility-container">
+            <div class="compatibility-box">
+                <h3 class="compatibility-title">Available On</h3>
+                <div class="platforms">
+                    <img src="android-icon.jpg" alt="Android" class="platform-icon" title="Android">
+                    <img src="windows-icon.jpg" alt="Windows" class="platform-icon" title="Windows">
+                </div>
+            </div>
+            
+            <div class="compatibility-box">
+                <h3 class="compatibility-title">Coming Soon</h3>
+                <div class="platforms">
+                    <img src="web-icon.png" alt="Web" class="platform-icon" title="Web Version">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="sidebar-container"></div>
+
+    <style>
+      .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background: transparent; /* Tornar o fundo transparente */
+        color: #000000; /* Cor do texto branco para melhor contraste em fundos escuros */
+        text-align: center;
+
+        font-size: 0.9em; /* Tamanho da fonte menor para o texto "direitos reservados" */
+        z-index: 100; /* Garante que o footer fique acima de outros elementos */
+      }
+
+      .footer-logo {
+        display: inline-block; /* Para que o texto e a imagem fiquem na mesma linha */
+      }
+
+      .footer-text {
+        font-size: 1.2em; /* Tamanho da fonte para "Zenith" */
+        vertical-align: middle; /* Alinhar verticalmente com a imagem, se houver */
+      }
+    </style>
+<script>
+  fetch('sidebar.html')
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById('sidebar-container').innerHTML = data;
+
+      const script = document.createElement('script');
+      script.src = 'sidebar.js';
+      script.onload = () => {
+        if (typeof initSidebarToggle === 'function') {
+          initSidebarToggle();
+        }
+      };
+      document.body.appendChild(script);
+    });
+</script>
+
+
+    <div class="footer">
+      <div class="footer-logo">
+        <img src="powerd.png" alt="Zenith" style="height: 30px; vertical-align: middle;">
+        
+      </div>
+      <br>
+    </div>
+
+    <script>
+      function adjustFooterPosition() {
+        const body = document.body;
+        const html = document.documentElement;
+        const fullHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+        const windowHeight = window.innerHeight || html.clientHeight || body.clientHeight;
+        const footer = document.querySelector('.footer');
+
+        if (fullHeight <= windowHeight) {
+          footer.style.position = 'fixed';
+        } else {
+          footer.style.position = 'static';
+        }
+      }
+
+      window.onload = adjustFooterPosition;
+      window.onresize = adjustFooterPosition;
+    </script>
+
+    <script src="script.js"></script> <!- **E o seu arquivo de script depois.** ->
+   
+</body>
+</html>

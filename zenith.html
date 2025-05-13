@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Zenith - About Us</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="solid-background"></div>
+
+    <!-- Cabeçalho Zenith -->
+    <div class="zenith-header">
+        <h1 class="zenith-title">Zenith</h1>
+        <h2 class="zenith-subtitle">About Us</h2>
+    </div>
+
+    <!-- Conteúdo dividido -->
+    <div class="zenith-content">
+        <!-- Divisor -->
+        <div class="divider-line"></div>
+        
+        <!-- Parte esquerda - Texto -->
+       <div class="zenith-text">
+  <p>Zenith is an independent project created by a passionate developer with no external funding, aiming to grow their skills in the tech field.</p>
+  <p>The goal is to build and share useful applications completely free of charge, giving back to the community with meaningful tools.</p>
+  <p>If you'd like to support my work and help keep me caffeinated, you can donate using the button below!</p>
+
+  <!-- Botão Buy Me a Coffee -->
+  <div class="coffee-button">
+      <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="zenithcomep" data-color="#FFDD00" data-emoji="" data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff"></script>
+  </div>
+</div>
+
+        <!-- Parte direita - Redes sociais -->
+        <div class="zenith-social">
+            <div class="social-item">
+                <a href="https://x.com/app_zenith" target="_blank" class="social-icon">
+ <i class="fab fa-twitter" style="color: black; font-size: 30px;"></i>
+                </a>
+                <span class="social-username">@app_zenith</span>
+            </div>
+            
+            <div class="social-item">
+                <a href="hhttps://www.instagram.com/zzenith.tech/" target="_blank" class="social-icon">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <span class="social-username">@zzenith.tech</span>
+            </div>
+            
+            <div class="social-item">
+                <a href="https://github.com/Zenith-sys" target="_blank" class="social-icon">
+                    <i class="fab fa-github"></i>
+                </a>
+                <span class="social-username">zenith-sys</span>
+            </div>
+            
+            <div class="social-item">
+                <a href="mailto:zenith.comercial.app@gmail.com" target="_blank" class="social-icon">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <span class="social-username">zenith.comercial.app@gmail.com</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-logo">
+            <img src="powerd.png" alt="Zenith" style="height: 30px; vertical-align: middle;">
+            <span class="footer-text"></span>
+        </div>
+        <br>
+    </div>
+<style>
+      .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background: transparent;
+        color: #000000;
+        text-align: center;
+        font-size: 0.9em;
+        z-index: 100;
+      }
+
+      .footer-logo {
+        display: inline-block;
+      }
+
+      .footer-text {
+        font-size: 1.2em;
+        vertical-align: middle;
+      }
+
+      /* ========== NOVAS REGRAS RESPONSIVAS ========== */
+      @media (max-width: 768px) {
+        .zenith-header {
+            margin: 40px 0 20px;
+        }
+        
+        .zenith-title {
+            font-size: 3em;
+        }
+        
+        .zenith-subtitle {
+            font-size: 1.2em;
+        }
+        
+        .zenith-content {
+            flex-direction: column;
+            padding: 20px;
+        }
+        
+        .divider-line {
+            display: none;
+        }
+        
+        .zenith-text, .zenith-social {
+            padding: 0;
+            width: 100%;
+        }
+        
+        .zenith-text {
+            margin-bottom: 30px;
+        }
+        
+        .social-item {
+            margin-bottom: 15px;
+        }
+        
+        .footer-logo img {
+            height: 25px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .zenith-title {
+            font-size: 2.5em;
+        }
+        
+        .zenith-subtitle {
+            font-size: 1em;
+        }
+        
+        .zenith-text p {
+            font-size: 1em;
+            line-height: 1.5;
+        }
+        
+        .social-icon {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+        
+        .social-username {
+            font-size: 0.9em;
+        }
+      }
+    </style>
+    <!-- Scripts -->
+    <script>
+        // Carrega a sidebar
+        fetch('sidebar.html')
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById('sidebar-container').innerHTML = data;
+                
+                const script = document.createElement('script');
+                script.src = 'sidebar.js';
+                script.onload = () => {
+                    if (typeof initSidebarToggle === 'function') {
+                        initSidebarToggle();
+                    }
+                };
+                document.body.appendChild(script);
+            });
+
+        // Ajusta a posição do footer
+        function adjustFooterPosition() {
+            const body = document.body;
+            const html = document.documentElement;
+            const fullHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+            const windowHeight = window.innerHeight || html.clientHeight || body.clientHeight;
+            const footer = document.querySelector('.footer');
+
+            if (fullHeight <= windowHeight) {
+                footer.style.position = 'fixed';
+            } else {
+                footer.style.position = 'static';
+            }
+        }
+
+        window.onload = adjustFooterPosition;
+        window.onresize = adjustFooterPosition;
+    </script>
+
+    <script src="script.js"></script>
+</body>
+</html>
