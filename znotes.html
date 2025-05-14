@@ -6,6 +6,185 @@
     <title>ZNotes</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <style>
+	 .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background: transparent;
+        color: #000000;
+        text-align: center;
+        font-size: 0.9em;
+        z-index: 100;
+      }
+
+      .footer-logo {
+        display: inline-block;
+      }
+
+      .footer-text {
+        font-size: 1.2em;
+        vertical-align: middle;
+      }
+
+      /* ========== NOVAS REGRAS RESPONSIVAS ========== */
+      @media (max-width: 768px) {
+        .zenith-header {
+            margin: 40px 0 20px;
+        }
+        
+        .zenith-title {
+            font-size: 3em;
+        }
+        
+        .zenith-subtitle {
+            font-size: 1.2em;
+        }
+        
+        .zenith-content {
+            flex-direction: column;
+            padding: 20px;
+        }
+        
+        .divider-line {
+            display: none;
+        }
+        
+        .zenith-text, .zenith-social {
+            padding: 0;
+            width: 100%;
+        }
+        
+        .zenith-text {
+            margin-bottom: 30px;
+        }
+        
+        .social-item {
+            margin-bottom: 15px;
+        }
+        
+        .footer-logo img {
+            height: 25px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .zenith-title {
+            font-size: 2.5em;
+        }
+        
+        .zenith-subtitle {
+            font-size: 1em;
+        }
+        
+        .zenith-text p {
+            font-size: 1em;
+            line-height: 1.5;
+        }
+        
+        .social-icon {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+        
+        .social-username {
+            font-size: 0.9em;
+        }
+      }
+        /* Estilos adicionais para o slider */
+        .screenshots-container {
+            margin: 40px auto;
+            max-width: 1000px;
+        }
+        
+        .device-slider {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .device-wrapper {
+            text-align: center;
+        }
+        
+        .device-title {
+            color: #d4d4d4;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        
+        .phone-frame, .desktop-frame {
+            position: relative;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border-radius: 20px;
+            overflow: hidden;
+            background: #111;
+        }
+        
+        .phone-frame {
+            width: 250px;
+            height: 500px;
+            padding: 20px 10px;
+        }
+        
+        .desktop-frame {
+            width: 500px;
+            height: 300px;
+            padding: 15px;
+        }
+        
+        .device-screen {
+            width: 100%;
+            height: 100%;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            transition: opacity 0.5s ease;
+        }
+        
+        .dots-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #7A6BB5;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.5;
+        }
+        
+        .dot.active {
+            opacity: 1;
+            transform: scale(1.2);
+            background-color: #4C3A90;
+        }
+        
+        @media (max-width: 768px) {
+            .device-slider {
+                gap: 30px;
+            }
+            
+            .phone-frame {
+                width: 180px;
+                height: 360px;
+            }
+            
+            .desktop-frame {
+                width: 350px;
+                height: 210px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="solid-background"></div>
@@ -19,6 +198,8 @@
             <p>An app where you can take notes in the simplest, safest and easiest way. Furthermore, it is extremely customizable, perfect for any user.</p>
             <a href="LINK_PARA_DOWNLOAD_DO_APK" class="download-button">Download</a>
         </div>
+
+       
 
         <div class="compatibility-container">
             <div class="compatibility-box">
@@ -37,78 +218,145 @@
             </div>
         </div>
     </div>
-
+ <!-- Slider de Screenshots -->
+        <div class="screenshots-container">
+            <div class="device-slider">
+                <div class="device-wrapper">
+                    <h3 class="device-title">Mobile Experience</h3>
+                    <div class="phone-frame">
+                        <div class="device-screen" id="phoneScreen"></div>
+                    </div>
+                    <div class="dots-container" id="phoneDots"></div>
+                </div>
+                
+                
+            </div>
+        </div>
     <div id="sidebar-container"></div>
 
-    <style>
-      .footer {
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        background: transparent; /* Tornar o fundo transparente */
-        color: #000000; /* Cor do texto branco para melhor contraste em fundos escuros */
-        text-align: center;
-
-        font-size: 0.9em; /* Tamanho da fonte menor para o texto "direitos reservados" */
-        z-index: 100; /* Garante que o footer fique acima de outros elementos */
-      }
-
-      .footer-logo {
-        display: inline-block; /* Para que o texto e a imagem fiquem na mesma linha */
-      }
-
-      .footer-text {
-        font-size: 1.2em; /* Tamanho da fonte para "Zenith" */
-        vertical-align: middle; /* Alinhar verticalmente com a imagem, se houver */
-      }
-    </style>
-<script>
-  fetch('sidebar.html')
-    .then(res => res.text())
-    .then(data => {
-      document.getElementById('sidebar-container').innerHTML = data;
-
-      const script = document.createElement('script');
-      script.src = 'sidebar.js';
-      script.onload = () => {
-        if (typeof initSidebarToggle === 'function') {
-          initSidebarToggle();
-        }
-      };
-      document.body.appendChild(script);
-    });
-</script>
-
-
     <div class="footer">
-      <div class="footer-logo">
-        <img src="powerd.png" alt="Zenith" style="height: 30px; vertical-align: middle;">
-        
-      </div>
-      <br>
+        <div class="footer-logo">
+            <img src="powerd.png" alt="Zenith" style="height: 30px; vertical-align: middle;">
+        </div>
+        <br>
     </div>
 
     <script>
-      function adjustFooterPosition() {
-        const body = document.body;
-        const html = document.documentElement;
-        const fullHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
-        const windowHeight = window.innerHeight || html.clientHeight || body.clientHeight;
-        const footer = document.querySelector('.footer');
-
-        if (fullHeight <= windowHeight) {
-          footer.style.position = 'fixed';
-        } else {
-          footer.style.position = 'static';
+        // Screenshots para mobile e desktop
+        const mobileScreenshots = [
+            'phone1.jpg',
+            'phone4.jpg',
+            'phone3.jpg'
+			
+        ];
+        
+       
+        // Configuração do slider
+        let currentMobileSlide = 0;
+        let currentDesktopSlide = 0;
+        let slideInterval;
+        
+        // Inicializar os sliders
+        function initSliders() {
+            // Criar dots para mobile
+            const phoneDots = document.getElementById('phoneDots');
+            mobileScreenshots.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.className = 'dot' + (index === 0 ? ' active' : '');
+                dot.dataset.index = index;
+                dot.addEventListener('click', () => {
+                    goToMobileSlide(index);
+                    resetInterval();
+                });
+                phoneDots.appendChild(dot);
+            });
+            
+            // Criar dots para desktop
+          
+            
+            // Carregar primeira imagem
+            updateMobileSlide();
+            updateDesktopSlide();
+            
+            // Iniciar intervalo de troca automática
+            startInterval();
         }
-      }
+        
+        // Atualizar slide mobile
+        function updateMobileSlide() {
+            const phoneScreen = document.getElementById('phoneScreen');
+            phoneScreen.style.backgroundImage = `url(${mobileScreenshots[currentMobileSlide]})`;
+            
+            // Atualizar dots
+            const dots = document.querySelectorAll('#phoneDots .dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentMobileSlide);
+            });
+        }
+       
+        
+        // Navegar para slide específico (mobile)
+        function goToMobileSlide(index) {
+            currentMobileSlide = index;
+            updateMobileSlide();
+        }
+     
+        
+        // Avançar para próximo slide
+        function nextSlide() {
+            currentMobileSlide = (currentMobileSlide + 1) % mobileScreenshots.length;
+            currentDesktopSlide = (currentDesktopSlide + 1) % desktopScreenshots.length;
+            updateMobileSlide();
+            updateDesktopSlide();
+        }
+        
+        // Iniciar intervalo automático
+        function startInterval() {
+            slideInterval = setInterval(nextSlide, 3000);
+        }
+        
+        // Resetar intervalo
+        function resetInterval() {
+            clearInterval(slideInterval);
+            startInterval();
+        }
+        
+        // Iniciar quando o DOM estiver carregado
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('sidebar.html')
+                .then(res => res.text())
+                .then(data => {
+                    document.getElementById('sidebar-container').innerHTML = data;
+                    
+                    const script = document.createElement('script');
+                    script.src = 'sidebar.js';
+                    script.onload = () => {
+                        if (typeof initSidebarToggle === 'function') {
+                            initSidebarToggle();
+                        }
+                    };
+                    document.body.appendChild(script);
+                });
+            
+            initSliders();
+            
+            function adjustFooterPosition() {
+                const body = document.body;
+                const html = document.documentElement;
+                const fullHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+                const windowHeight = window.innerHeight || html.clientHeight || body.clientHeight;
+                const footer = document.querySelector('.footer');
 
-      window.onload = adjustFooterPosition;
-      window.onresize = adjustFooterPosition;
+                if (fullHeight <= windowHeight) {
+                    footer.style.position = 'fixed';
+                } else {
+                    footer.style.position = 'static';
+                }
+            }
+
+            window.onload = adjustFooterPosition;
+            window.onresize = adjustFooterPosition;
+        });
     </script>
-
-    <script src="script.js"></script> <!- **E o seu arquivo de script depois.** ->
-   
 </body>
 </html>
