@@ -193,12 +193,22 @@
         <h1 class="tituznotes">ZNotes</h1>
         <p class="subtitulo">Note Down the Cosmos</p>
 
-        <div class="download-box">
-            <img src="znotes.png" alt="Logo Znotes" class="logo-aplicacao">
-            <p>An app where you can take notes in the simplest, safest and easiest way. Furthermore, it is extremely customizable, perfect for any user.</p>
-            <a href="znotes-v1.apk" class="download-button">Download</a>
-        </div>
-
+       <div class="download-box">
+    <img src="znotes.png" alt="Logo Znotes" class="logo-aplicacao">
+    <p>An app where you can take notes in the simplest, safest and easiest way. Furthermore, it is extremely customizable, perfect for any user.</p>
+    
+    <div class="version-selector">
+        <select id="versionSelect">
+            <option value="">Select version</option>
+            <option value="1.0">Version 1.0 (Stable)</option>
+            <option value="1.1-beta">Version 1.1 (Beta)</option>
+            <option value="nightly">Nightly Build</option>
+        </select>
+        <div id="selectedVersion" class="selected-version"></div>
+    </div>
+    
+    <a href="#" id="downloadButton" class="download-button">Download</a>
+</div>
        
 
         <div class="compatibility-container">
