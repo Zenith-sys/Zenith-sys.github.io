@@ -48,29 +48,47 @@
     border-bottom: none;
   }
 
-.sidebar-icon svg {
-    width: 1.2em;
-    height: 1.2em;
-    margin-right: 10px;
-    vertical-align: middle;
-    fill: currentColor;
-}
-
-/* Manter o alinhamento vertical dos itens do menu */
-.sidebar-menu a {
+  .sidebar-menu a {
     display: flex;
     align-items: center;
-}
-
-/* Ajuste para remover a margem direita do container do ícone */
-.sidebar-icon {
-    margin-right: 10px;
-    display: inline-flex;
-    align-items: center;
-}
+    color: #ddd;
+    text-decoration: none;
+    font-size: 1em;
+    transition: color 0.3s ease;
+  }
 
   .sidebar-menu a:hover {
     color: #eee;
+  }
+
+  .sidebar-icon {
+    margin-right: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sidebar-icon svg {
+    width: 1.2em;
+    height: 1.2em;
+    fill: currentColor;
+  }
+
+  .sidebar-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #444;
+  }
+
+  .sidebar-header.no-bg {
+    background-color: transparent;
+  }
+
+  .sidebar-logo {
+    height: 80px;
+    width: auto;
   }
 
   /* ========== NOVAS REGRAS (MOBILE) ========== */
@@ -108,38 +126,51 @@
     .sidebar-logo {
       height: 60px;
     }
+    
+    .sidebar-icon svg {
+      width: 1.4em;
+      height: 1.4em;
+    }
   }
 </style>
 
-<ul class="sidebar-menu">
+<button class="sidebar-toggle">☰</button>
+
+<div class="sidebar">
+  <div class="sidebar-header no-bg">
+    <img src="zenithl.png" alt="Zenith" class="sidebar-logo">
+  </div>
+
+  <ul class="sidebar-menu">
     <li>
-        <a href="index.html">
-            <span class="sidebar-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M6 19h3v-5q0-.425.288-.712T10 13h4q.425 0 .713.288T15 14v5h3v-9l-6-4.5L6 10zm-2 0v-9q0-.475.213-.9t.587-.7l6-4.5q.525-.4 1.2-.4t1.2.4l6 4.5q.375.275.588.7T20 10v9q0 .825-.588 1.413T18 21h-4q-.425 0-.712-.288T13 20v-5h-2v5q0 .425-.288.713T10 21H6q-.825 0-1.412-.587T4 19m8-6.75"/>
-                </svg>
-            </span>
-            Home
-        </a>
+      <a href="index.html">
+        <span class="sidebar-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M6 19h3v-5q0-.425.288-.712T10 13h4q.425 0 .713.288T15 14v5h3v-9l-6-4.5L6 10zm-2 0v-9q0-.475.213-.9t.587-.7l6-4.5q.525-.4 1.2-.4t1.2.4l6 4.5q.375.275.588.7T20 10v9q0 .825-.588 1.413T18 21h-4q-.425 0-.712-.288T13 20v-5h-2v5q0 .425-.288.713T10 21H6q-.825 0-1.412-.587T4 19m8-6.75"/>
+          </svg>
+        </span>
+        Home
+      </a>
     </li>
     <li>
-        <a href="zenith.html">
-            <span class="sidebar-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M10 18q-.825 0-1.412-.587T8 16v-1.25q-1.425-.975-2.212-2.5T5 9q0-2.925 2.038-4.962T12 2t4.963 2.038T19 9q0 1.725-.788 3.238T16 14.75V16q0 .825-.587 1.413T14 18zm0-2h4v-2.3l.85-.6q1.025-.7 1.588-1.787T17 9q0-2.075-1.463-3.537T12 4T8.463 5.463T7 9q0 1.225.563 2.313T9.15 13.1l.85.6zm0 6q-.425 0-.712-.288T9 21v-1h6v1q0 .425-.288.713T14 22zm2-13"/>
-                </svg>
-            </span>
-            Zenith
-        </a>
+      <a href="zenith.html">
+        <span class="sidebar-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M10 18q-.825 0-1.412-.587T8 16v-1.25q-1.425-.975-2.212-2.5T5 9q0-2.925 2.038-4.962T12 2t4.963 2.038T19 9q0 1.725-.788 3.238T16 14.75V16q0 .825-.587 1.413T14 18zm0-2h4v-2.3l.85-.6q1.025-.7 1.588-1.787T17 9q0-2.075-1.463-3.537T12 4T8.463 5.463T7 9q0 1.225.563 2.313T9.15 13.1l.85.6zm0 6q-.425 0-.712-.288T9 21v-1h6v1q0 .425-.288.713T14 22zm2-13"/>
+          </svg>
+        </span>
+        Zenith
+      </a>
     </li>
     <li>
-        <a href="projects.html">
-            <span class="sidebar-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M12 15.5q.825 0 1.413-.587T14 13.5t-.587-1.412T12 11.5t-1.412.588T10 13.5t.588 1.413T12 15.5M4 21q-.825 0-1.412-.587T2 19V8q0-.825.588-1.412T4 6h4V4q0-.825.588-1.412T10 2h4q.825 0 1.413.588T16 4v2h4q.825 0 1.413.588T22 8v11q0 .825-.587 1.413T20 21zm0-2h16V8H4zm6-13h4V4h-4zM4 19V8z"/>
-                </svg>
-            </span>
-            Projects
-        </a>
+      <a href="projects.html">
+        <span class="sidebar-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M12 15.5q.825 0 1.413-.587T14 13.5t-.587-1.412T12 11.5t-1.412.588T10 13.5t.588 1.413T12 15.5M4 21q-.825 0-1.412-.587T2 19V8q0-.825.588-1.412T4 6h4V4q0-.825.588-1.412T10 2h4q.825 0 1.413.588T16 4v2h4q.825 0 1.413.588T22 8v11q0 .825-.587 1.413T20 21zm0-2h16V8H4zm6-13h4V4h-4zM4 19V8z"/>
+          </svg>
+        </span>
+        Projects
+      </a>
     </li>
-</ul>
+  </ul>
+</div>
