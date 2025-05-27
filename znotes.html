@@ -368,5 +368,77 @@
             window.onresize = adjustFooterPosition;
         });
     </script>
+	<script>
+    // Controle do seletor de versão
+    const versionSelect = document.getElementById('versionSelect');
+    const downloadButton = document.getElementById('downloadButton');
+    const selectedVersionDisplay = document.getElementById('selectedVersion');
+    
+    versionSelect.addEventListener('change', function() {
+        if (this.value) {
+            selectedVersionDisplay.textContent = `Selected: ${this.options[this.selectedIndex].text}`;
+            selectedVersionDisplay.classList.add('show');
+            
+            // Atualizar o link de download conforme a versão selecionada
+            if (this.value === '1.0') {
+                downloadButton.href = 'znotes-v1.0.apk';
+            } else if (this.value === '1.1-beta') {
+                downloadButton.href = 'znotes-v1.1-beta.apk';
+            } else if (this.value === 'nightly') {
+                downloadButton.href = 'znotes-nightly.apk';
+            }
+        } else {
+            selectedVersionDisplay.classList.remove('show');
+            downloadButton.href = '#';
+        }
+    });
+    
+  
+    const downloadButton = document.getElementById('downloadButton');
+    const versionModal = document.createElement('div');
+    versionModal.className = 'version-modal';
+    versionModal.innerHTML = `
+        <div class="version-modal-content">
+            <h3>Select ZNotes Version</h3>
+            <div class="version-option" data-version="1.0">Version 1.0 (Stable)</div>
+            <div class="version-option" data-version="1.1-beta">Version 1.1 (Beta)</div>
+            <div class="version-option" data-version="nightly">Nightly Build</div>
+            <button class="close-modal">Close</button>
+        </div>
+    `;
+    document.body.appendChild(versionModal);
+    
+    downloadButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        versionModal.style.display = 'flex';
+    });
+    
+    versionModal.querySelector('.close-modal').addEventListener('click', function() {
+        versionModal.style.display = 'none';
+    });
+    
+    const versionOptions = versionModal.querySelectorAll('.version-option');
+    versionOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            const version = this.getAttribute('data-version');
+            // Atualizar o link de download conforme a versão selecionada
+            if (version === '1.0') {
+                downloadButton.href = 'znotes-v1.0.apk';
+            } else if (version === '1.1-beta') {
+                downloadButton.href = 'znotes-v1.1-beta.apk';
+            } else if (version === 'nightly') {
+                downloadButton.href = 'znotes-nightly.apk';
+            }
+            
+            // Mostrar versão selecionada
+            const selectedVersionDisplay = document.getElementById('selectedVersion');
+            selectedVersionDisplay.textContent = `Selected: ${this.textContent}`;
+            selectedVersionDisplay.classList.add('show');
+            
+            versionModal.style.display = 'none';
+        });
+    });
+    
+</script>
 </body>
 </html>
