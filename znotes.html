@@ -197,16 +197,15 @@
     <img src="znotes.png" alt="Logo Znotes" class="logo-aplicacao">
     <p>An app where you can take notes in the simplest, safest and easiest way. Furthermore, it is extremely customizable, perfect for any user.</p>
     
-    <div class="version-selector">
-        <select id="versionSelect">
-            <option value="">Select version</option>
-            <option value="1.0">Version 1.0 (Stable)</option>
-            <option value="1.1-beta">Version 1.1 (Beta)</option>
-            <option value="nightly">Nightly Build</option>
-        </select>
-        <div id="selectedVersion" class="selected-version"></div>
-    </div>
-    
+    <!-- Seleciona as versões -->
+<div class="version-selector">
+    <select id="versionSelect">
+        <option value="">Select version</option>
+        <option value="stable">Version 1.0 (Stable)</option>
+        <option value="beta">Version 1.1 (Beta)</option>
+    </select>
+    <div id="selectedVersion" class="selected-version"></div>
+</div>
     <a href="#" id="downloadButton" class="download-button">Download</a>
 </div>
        
@@ -370,28 +369,27 @@
     </script>
 	<script>
     // Controle do seletor de versão
-    const versionSelect = document.getElementById('versionSelect');
-    const downloadButton = document.getElementById('downloadButton');
-    const selectedVersionDisplay = document.getElementById('selectedVersion');
-    
-    versionSelect.addEventListener('change', function() {
-        if (this.value) {
-            selectedVersionDisplay.textContent = `Selected: ${this.options[this.selectedIndex].text}`;
-            selectedVersionDisplay.classList.add('show');
-            
-            // Atualizar o link de download conforme a versão selecionada
-            if (this.value === '1.0') {
-                downloadButton.href = 'znotes-v1.0.apk';
-            } else if (this.value === '1.1-beta') {
-                downloadButton.href = 'znotes-v1.1-beta.apk';
-            } else if (this.value === 'nightly') {
-                downloadButton.href = 'znotes-nightly.apk';
-            }
-        } else {
-            selectedVersionDisplay.classList.remove('show');
-            downloadButton.href = '#';
+  // Substitua o script de controle de versões por este:
+const versionSelect = document.getElementById('versionSelect');
+const downloadButton = document.getElementById('downloadButton');
+const selectedVersionDisplay = document.getElementById('selectedVersion');
+
+versionSelect.addEventListener('change', function() {
+    if (this.value) {
+        selectedVersionDisplay.textContent = `Selected: ${this.options[this.selectedIndex].text}`;
+        selectedVersionDisplay.classList.add('show');
+        
+        // Atualizar o link de download conforme a versão selecionada
+        if (this.value === 'stable') {
+            downloadButton.href = 'znotes-v1.0.apk';
+        } else if (this.value === 'beta') {
+            downloadButton.href = 'znotes-v1.apk'; 
         }
-    });
+    } else {
+        selectedVersionDisplay.classList.remove('show');
+        downloadButton.href = '#';
+    }
+});
     
   
    
