@@ -28,7 +28,7 @@
         vertical-align: middle;
       }
 
-      /* ========== NOVAS REGRAS RESPONSIVAS ========== */
+     
       @media (max-width: 768px) {
         .zenith-header {
             margin: 40px 0 20px;
@@ -251,7 +251,7 @@
     </div>
 
     <script>
-        // Screenshots para mobile e desktop
+       
         const mobileScreenshots = [
             'phone1.jpg',
             'phone4.jpg',
@@ -260,14 +260,14 @@
         ];
         
        
-        // Configuração do slider
+     
         let currentMobileSlide = 0;
         let currentDesktopSlide = 0;
         let slideInterval;
         
-        // Inicializar os sliders
+     
         function initSliders() {
-            // Criar dots para mobile
+    
             const phoneDots = document.getElementById('phoneDots');
             mobileScreenshots.forEach((_, index) => {
                 const dot = document.createElement('div');
@@ -279,32 +279,27 @@
                 });
                 phoneDots.appendChild(dot);
             });
-            
-            // Criar dots para desktop
+
           
-            
-            // Carregar primeira imagem
+     
             updateMobileSlide();
             updateDesktopSlide();
             
-            // Iniciar intervalo de troca automática
             startInterval();
         }
         
-        // Atualizar slide mobile
+      
         function updateMobileSlide() {
             const phoneScreen = document.getElementById('phoneScreen');
             phoneScreen.style.backgroundImage = `url(${mobileScreenshots[currentMobileSlide]})`;
-            
-            // Atualizar dots
+        
             const dots = document.querySelectorAll('#phoneDots .dot');
             dots.forEach((dot, index) => {
                 dot.classList.toggle('active', index === currentMobileSlide);
             });
         }
        
-        
-        // Navegar para slide específico (mobile)
+ 
         function goToMobileSlide(index) {
             currentMobileSlide = index;
             updateMobileSlide();
@@ -319,18 +314,18 @@
             updateDesktopSlide();
         }
         
-        // Iniciar intervalo automático
+   
         function startInterval() {
             slideInterval = setInterval(nextSlide, 3000);
         }
         
-        // Resetar intervalo
+   
         function resetInterval() {
             clearInterval(slideInterval);
             startInterval();
         }
         
-        // Iniciar quando o DOM estiver carregado
+       
         document.addEventListener('DOMContentLoaded', function() {
             fetch('sidebar.html')
                 .then(res => res.text())
@@ -368,8 +363,7 @@
         });
     </script>
 	<script>
-    // Controle do seletor de versão
-  // Substitua o script de controle de versões por este:
+    
 const versionSelect = document.getElementById('versionSelect');
 const downloadButton = document.getElementById('downloadButton');
 const selectedVersionDisplay = document.getElementById('selectedVersion');
@@ -379,7 +373,7 @@ versionSelect.addEventListener('change', function() {
         selectedVersionDisplay.textContent = `Selected: ${this.options[this.selectedIndex].text}`;
         selectedVersionDisplay.classList.add('show');
         
-        // Atualizar o link de download conforme a versão selecionada
+  
         if (this.value === 'stable') {
             downloadButton.href = 'znotes-v1.0.apk';
         } else if (this.value === 'beta') {
