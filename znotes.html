@@ -227,20 +227,19 @@
             </div>
         </div>
     </div>
- <!-- Slider de Screenshots -->
-        <div class="screenshots-container">
-            <div class="device-slider">
-                <div class="device-wrapper">
-                    <h3 class="device-title">Mobile Experience</h3>
-                    <div class="phone-frame">
-                        <div class="device-screen" id="phoneScreen"></div>
-                    </div>
-                    <div class="dots-container" id="phoneDots"></div>
-                </div>
-                
-                
-            </div>
-        </div>
+ <!-- Animação interativa do Figma -->
+<div style="margin: 60px auto; text-align: center;">
+    <h3 class="device-title">Veja a experiência em ação</h3>
+    <iframe 
+        style="border: none; border-radius: 20px;" 
+        width="100%" 
+        height="600" 
+        src="https://www.figma.com/proto/jlyy4ticcVvhvNl1LL4FAH/anima%C3%A7ao?node-id=2026-96&t=bn6GbgWkp3LFuCM3-0&scaling=contain&content-scaling=fixed&page-id=2026%3A81&starting-point-node-id=2044%3A53" 
+        allowfullscreen 
+        loading="lazy">
+    </iframe>
+</div>
+
     <div id="sidebar-container"></div>
 
     <div class="footer">
@@ -252,78 +251,7 @@
 
     <script>
        
-        const mobileScreenshots = [
-            'phone1.jpg',
-            'phone4.jpg',
-            'phone3.jpg'
-			
-        ];
-        
-       
      
-        let currentMobileSlide = 0;
-        let currentDesktopSlide = 0;
-        let slideInterval;
-        
-     
-        function initSliders() {
-    
-            const phoneDots = document.getElementById('phoneDots');
-            mobileScreenshots.forEach((_, index) => {
-                const dot = document.createElement('div');
-                dot.className = 'dot' + (index === 0 ? ' active' : '');
-                dot.dataset.index = index;
-                dot.addEventListener('click', () => {
-                    goToMobileSlide(index);
-                    resetInterval();
-                });
-                phoneDots.appendChild(dot);
-            });
-
-          
-     
-            updateMobileSlide();
-            updateDesktopSlide();
-            
-            startInterval();
-        }
-        
-      
-        function updateMobileSlide() {
-            const phoneScreen = document.getElementById('phoneScreen');
-            phoneScreen.style.backgroundImage = `url(${mobileScreenshots[currentMobileSlide]})`;
-        
-            const dots = document.querySelectorAll('#phoneDots .dot');
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentMobileSlide);
-            });
-        }
-       
- 
-        function goToMobileSlide(index) {
-            currentMobileSlide = index;
-            updateMobileSlide();
-        }
-     
-        
-        // Avançar para próximo slide
-        function nextSlide() {
-            currentMobileSlide = (currentMobileSlide + 1) % mobileScreenshots.length;
-            currentDesktopSlide = (currentDesktopSlide + 1) % desktopScreenshots.length;
-            updateMobileSlide();
-            updateDesktopSlide();
-        }
-        
-   
-        function startInterval() {
-            slideInterval = setInterval(nextSlide, 3000);
-        }
-        
-   
-        function resetInterval() {
-            clearInterval(slideInterval);
-            startInterval();
-        }
         
        
         document.addEventListener('DOMContentLoaded', function() {
